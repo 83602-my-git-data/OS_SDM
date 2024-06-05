@@ -1,0 +1,48 @@
+// My Container 
+// create volume 
+docker volume create volume mysqlvolume
+
+// create container of voulme 
+docker container run -itd --name mysqlContainer -p 3307:3307 -e MYSQL_ROOT_PASSWORD=Bhagesh -v mysqlVolume:/var/lib/mysql mysql
+
+// container execute 
+docker container exec -it 88cc6bc98b99 bash
+
+// mysql root 
+mysql -u root -p
+Enter password: 
+
+ create database sample;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use sample;
+Database changed
+mysql> create table User(
+    -> id int primary key auto_increment,
+    -> name varchar(50),
+    -> address varchar(50));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into User (name,address) values('user1','solapur');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into User (name,address) values('user2','pune');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> exit
+Bye
+bash-5.1# exit
+exit
+
+// once more remove mysql container 
+
+docker container rm --force 88cc6bc98b99
+
+docker container run -itd --name mysqlcontainer -p 3307:3307 -e MYSQL_ROOT_PASSWORD=Bhagesh -v mysqlVolume:/var/lib/mysql mysql
+
+docker container exec -it mysqlcontainer bash
+
+
+mysql -u root -p
+Enter password: 
+Welcome to the MySQL monito

@@ -1,0 +1,59 @@
+## pods
+# get the list of pods
+> kubectl get pod
+# keep watching the status of pods
+> kubectl get pods --watch
+# get more details of every pod> kubectl get pods -o wide
+# create a pod by using a YAML file
+> kubectl create -f <yaml file name>
+# get details of selected pod
+# > kubectl describe pod mypod
+> kubectl describe pod <pod name>
+# delete a selected pod
+# > kubectl delete pod mypod
+> kubectl delete pod <pod name>
+Pod yaml {
+apiVersion: v1
+kind: Pod
+metadata:
+name: pod3
+labels:
+type: frontend
+spec:
+containers:
+- name: container1
+image: httpd
+ports:
+- containerPort: 80
+}
+ReplicaSet
+# get the list of replica sets
+> kubectl get rs
+> kubectl create -f <file name># create a rs
+> kubectl create -f <file name>
+lete
+kubectl delete replicaset --all -n default
+ReplicaSet yaml {
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+name: rs1
+spec:
+# no of replicas to be managed
+replicas: 3
+# criteria to find the pod(s) which belong to the RS
+selector:
+matchLabels:
+type: frontend
+# if pod does not exist, then create them using following template
+template:
+metadata:
+labels:
+type: frontend
+spec:
+containers:
+- name: container1
+image: httpd
+ports:
+- containerPort: 80
+}

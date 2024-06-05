@@ -1,0 +1,19 @@
+Create volume
+docker volume create <volume name >
+Run the image
+docker container run -d --name akshata -p 8080:3306 -e
+MYSQL_ROOT_PASSWORD="manager" -v /Users/tejas/volume/ram:/var/lib/
+mysql mysql
+docker container exec -it <containername > bash
+For httpd
+1st create mkdir
+Take. 1 index.html
+And 1 Dockerfile
+And put the data
+{ FROM httpd
+COPY index.html /usr/local/apache2/htdocs
+EXPOSE 80 }
+Then build
+docker image build -t myimage .
+And run
+docker container run -itd --name web -p 8085:80 myimage
